@@ -1,4 +1,3 @@
-
 export type UserName = {
   firstName: string;
   middleName: string;
