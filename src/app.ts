@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import { StudentRoutes } from './app/modules/student.route';
+import { StudentRoutes } from './app/modules/student/student.route';
 const app = express();
 // const port = 3000;
 app.use(cors());
@@ -18,4 +18,3 @@ app.get('/', getController);
 
 export default app;
 
-console.log(process.cwd());
