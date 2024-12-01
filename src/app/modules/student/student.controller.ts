@@ -1,5 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { studentServices } from './student.service';
+import sentResponse from '../../utils/sentResponse';
+import HttpStatus from 'http-status';
+
 // import studentValidationSchema from './student.zod.validation';
 
 const getAllStudents = async (
@@ -9,11 +12,13 @@ const getAllStudents = async (
 ) => {
   try {
     const result = await studentServices.getAllStudentFromDB();
-    res.status(200).json({
+    sentResponse(res, {
+      statusCode: HttpStatus.OK,
       success: true,
       message: 'Students are retrived succesfully',
       data: result,
     });
+    
   } catch (err) {
     // res.status(500).json({
     //   success: true,
@@ -33,7 +38,9 @@ const getSingleStudent = async (
     // const studentId = req.params.studentId;
     const { studentId } = req.params;
     const result = await studentServices.getSingleStudentFromDB(studentId);
-    res.status(200).json({
+    
+    sentResponse(res, {
+      statusCode: HttpStatus.OK,
       success: true,
       message: 'Student is retrived succesfully',
       data: result,
@@ -52,7 +59,9 @@ const deleteStudent = async (
     // const studentId = req.params.studentId;
     const { studentId } = req.params;
     const result = await studentServices.deleteStudentFromDB(studentId);
-    res.status(200).json({
+ 
+    sentResponse(res, {
+      statusCode: HttpStatus.OK,
       success: true,
       message: 'Student is deleted succesfully',
       data: result,
