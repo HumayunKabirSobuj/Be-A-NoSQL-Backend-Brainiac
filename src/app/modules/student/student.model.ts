@@ -125,7 +125,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       },
       required: [true, 'Student gender is Required'],
     },
-    dateOfBirth: { type: String },
+    dateOfBirth: { type: Date },
     email: {
       type: String,
       trim: true,
@@ -155,7 +155,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       trim: true,
       required: [true, 'Student present address is Required'],
     },
-    parmanentAddress: {
+    permanentAddress: {
       type: String,
       trim: true,
       required: [true, 'Student parmanent address is Required'],

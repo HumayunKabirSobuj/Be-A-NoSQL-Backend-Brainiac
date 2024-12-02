@@ -28,13 +28,13 @@ export type TStudent = {
   user:Types.ObjectId
   name: TUserName;
   gender: 'male' | 'female' | 'other';
-  dateOfBirth?: string;
+  dateOfBirth?: Date;
   email: string;
   contactNo: string;
   emergencyContactNo: string;
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
   presentAddress: string;
-  parmanentAddress: string;
+  permanentAddress: string;
   guardian: TGuardian;
   localGuardian: TLocalGuardian;
   profileImg?: string;
