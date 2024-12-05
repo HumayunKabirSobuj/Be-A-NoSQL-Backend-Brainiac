@@ -24,10 +24,26 @@ const findLastStudentId = async () => {
 
 // need year, semester code and 4 digit number
 export const genarateStudentID = async (paylod: TAcademicSemester) => {
-  const currentId = (0).toString(); // 0000 --> by default
-  if (await findLastStudentId()) {
-    const lastStudent = await findLastStudentId();
+  let currentId = (0).toString(); // 0000 --> by default
+
+  // 2030 01 0001
+  const lastStudentId = await findLastStudentId();
+  const lastStudentSemesterCode = lastStudentId?.substring(4, 6);
+  const lastStudentSemesterYear = lastStudentId?.substring(0, 4);
+  const currentSemesterCode = paylod.code;
+  const currentYear = paylod.year;
+
+  if (
+    lastStudentId &&
+    lastStudentSemesterCode === currentSemesterCode &&
+    lastStudentSemesterYear === currentYear
+  ) {
+    currentId = lastStudentId;
   }
+
+  
+
+
   let incrementId = (Number(currentId) + 1).toString().padStart(4, '0');
   incrementId = `${paylod.year}${paylod.code}${incrementId}`;
 
