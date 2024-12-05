@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import { studentServices } from './student.service';
-import sentResponse from '../../utils/sentResponse';
+import sendResponse from '../../utils/sentResponse';
 import HttpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 
@@ -10,7 +10,7 @@ import catchAsync from '../../utils/catchAsync';
 
 const getAllStudents = catchAsync(async (req, res) => {
   const result = await studentServices.getAllStudentFromDB();
-  sentResponse(res, {
+  sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
     message: 'Students are retrived succesfully',
@@ -23,7 +23,7 @@ const getSingleStudent: RequestHandler = catchAsync(async (req, res) => {
   const { studentId } = req.params;
   const result = await studentServices.getSingleStudentFromDB(studentId);
 
-  sentResponse(res, {
+  sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
     message: 'Student is retrived succesfully',
@@ -36,7 +36,7 @@ const deleteStudent: RequestHandler = catchAsync(async (req, res) => {
   const { studentId } = req.params;
   const result = await studentServices.deleteStudentFromDB(studentId);
 
-  sentResponse(res, {
+  sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
     message: 'Student is deleted succesfully',

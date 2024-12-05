@@ -25,7 +25,7 @@ export type TLocalGuardian = {
 export type TStudent = {
   id: string;
   //user create
-  user:Types.ObjectId
+  user: Types.ObjectId;
   name: TUserName;
   gender: 'male' | 'female' | 'other';
   dateOfBirth?: Date;
@@ -38,6 +38,7 @@ export type TStudent = {
   guardian: TGuardian;
   localGuardian: TLocalGuardian;
   profileImg?: string;
+  admissionSemester: Types.ObjectId;
   isDeleted: boolean;
 };
 

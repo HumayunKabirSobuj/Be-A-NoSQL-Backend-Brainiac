@@ -1,5 +1,5 @@
 import { UserServices } from './user.service';
-import sentResponse from '../../utils/sentResponse';
+import sendResponse from '../../utils/sentResponse';
 import HttpStatus from 'http-status';
 
 import catchAsync from '../../utils/catchAsync';
@@ -14,7 +14,7 @@ const CreateStudent = catchAsync(async (req, res) => {
 
   //will call service function to sent this data
   const result = await UserServices.createStudentIntoDB(password, studentData);
-  sentResponse(res, {
+  sendResponse(res, {
     statusCode: HttpStatus.OK,
     success: true,
     message: 'Student is created succesfully',

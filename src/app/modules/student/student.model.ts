@@ -111,7 +111,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       unique: true,
       ref: 'User', //ref:'User' এখানে User হচ্ছে model name
     },
-    
+
     name: {
       type: userNameSchema,
       required: [true, 'Student Name is Required'],
@@ -169,7 +169,11 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: [true, 'Local guardian field is Required'],
     },
     profileImg: { type: String },
-    
+    admissionSemester: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicSemester',
+    },
+
     isDeleted: {
       type: Boolean,
       default: false,
@@ -208,7 +212,6 @@ studentSchema.pre('aggregate', function (next) {
 //document middleware
 
 //pre save middlware / hook : will work on create() or save()
-
 
 //creating a custom static method
 

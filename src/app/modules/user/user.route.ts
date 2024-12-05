@@ -12,4 +12,6 @@ Router.post(
   userControllers.CreateStudent,
 );
 
+
+
 export const UserRoutes = Router;
