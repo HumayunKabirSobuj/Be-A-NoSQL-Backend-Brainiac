@@ -12,7 +12,6 @@ const createAcademicDepartmentValidationSchema = z.object({
     }),
   }),
 });
-
 const updateAcademicDepartmentValidationSchema = z.object({
   body: z.object({
     name: z
