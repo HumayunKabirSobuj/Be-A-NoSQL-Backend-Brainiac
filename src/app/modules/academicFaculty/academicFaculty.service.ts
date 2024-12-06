@@ -12,7 +12,7 @@ const getAllAcademicFacultiesFromDB = async () => {
 };
 
 const getSingleAcademicFacultyFromDB = async (id: string) => {
-  const result = await AcademicFaculty.findById({ id });
+  const result = await AcademicFaculty.findById({ _id: id });
   return result;
 };
 

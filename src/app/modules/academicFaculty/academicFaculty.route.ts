@@ -5,7 +5,7 @@ import { AcademicFacultyControllers } from './academicFaculty.controller';
 const router = express.Router();
 
 router.post(
-  '/create-academic-faculy',
+  '/create-academic-faculty',
   validateRequest(
     AcademicFacultyValidation.createAcademicFacultyValidationSchema,
   ),
