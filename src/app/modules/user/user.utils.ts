@@ -38,11 +38,8 @@ export const genarateStudentID = async (paylod: TAcademicSemester) => {
     lastStudentSemesterCode === currentSemesterCode &&
     lastStudentSemesterYear === currentYear
   ) {
-    currentId = lastStudentId;
+    currentId = lastStudentId.substring(6);
   }
-
-  
-
 
   let incrementId = (Number(currentId) + 1).toString().padStart(4, '0');
   incrementId = `${paylod.year}${paylod.code}${incrementId}`;

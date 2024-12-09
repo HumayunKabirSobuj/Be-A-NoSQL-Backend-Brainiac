@@ -6,8 +6,6 @@ import catchAsync from '../../utils/catchAsync';
 
 // import studentValidationSchema from './student.zod.validation';
 
-
-
 const getAllStudents = catchAsync(async (req, res) => {
   const result = await studentServices.getAllStudentFromDB();
   sendResponse(res, {
@@ -44,8 +42,22 @@ const deleteStudent: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 
-export const StudentController = {
+const updateStudent = catchAsync(async (req, res) => {
+  const { studentId } = req.params;
+  const { student } = req.body;
+  const result = await studentServices.updateStudentIntoDB(studentId, student);
+
+  sendResponse(res, {
+    statusCode: HttpStatus.OK,
+    success: true,
+    message: 'Student is updated succesfully',
+    data: result,
+  });
+});
+
+export const StudentControllers = {
   getAllStudents,
   getSingleStudent,
   deleteStudent,
+  updateStudent,
 };
