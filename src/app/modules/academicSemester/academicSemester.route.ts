@@ -1,21 +1,16 @@
 import express from 'express';
-import { AcademicSemesterControllers } from './academicSemester.controller';
 import validateRequest from '../../middlewares/validateRequest';
-import { academicSemesterValidations } from './academicSemester.validation';
+import { AcademicSemesterControllers } from './academicSemester.controller';
+import { AcademicSemesterValidations } from './academicSemester.validation';
+
 const router = express.Router();
-
-//will call controller function
-
-// router.get('/', StudentController.getAllStudents);
-// router.get('/:studentId', StudentController.getSingleStudent);
-// router.delete('/:studentId', StudentController.deleteStudent);
 
 router.post(
   '/create-academic-semester',
   validateRequest(
-    academicSemesterValidations.createAcademicSemesterValidationSchema,
+    AcademicSemesterValidations.createAcdemicSemesterValidationSchema,
   ),
-  AcademicSemesterControllers.CreateAcademicSemester,
+  AcademicSemesterControllers.createAcademicSemester,
 );
 
 router.get(
@@ -26,12 +21,11 @@ router.get(
 router.patch(
   '/:semesterId',
   validateRequest(
-    academicSemesterValidations.updateAcademicSemesterValidationSchema,
+    AcademicSemesterValidations.updateAcademicSemesterValidationSchema,
   ),
   AcademicSemesterControllers.updateAcademicSemester,
 );
 
 router.get('/', AcademicSemesterControllers.getAllAcademicSemesters);
-
 
 export const AcademicSemesterRoutes = router;

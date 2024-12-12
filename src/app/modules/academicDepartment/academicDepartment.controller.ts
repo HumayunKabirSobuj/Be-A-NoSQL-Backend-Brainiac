@@ -1,14 +1,14 @@
-import sendResponse from '../../utils/sentResponse';
-import HttpStatus from 'http-status';
-
+import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
 import { AcademicDepartmentServices } from './academicDepartment.service';
 
-const CreateAcademicDepartment = catchAsync(async (req, res) => {
+const createAcademicDepartmemt = catchAsync(async (req, res) => {
   const result =
     await AcademicDepartmentServices.createAcademicDepartmentIntoDB(req.body);
+
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: httpStatus.OK,
     success: true,
     message: 'Academic department is created succesfully',
     data: result,
@@ -20,7 +20,7 @@ const getAllAcademicDepartments = catchAsync(async (req, res) => {
     await AcademicDepartmentServices.getAllAcademicDepartmentsFromDB();
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: httpStatus.OK,
     success: true,
     message: 'Academic departments are retrieved successfully',
     data: result,
@@ -35,14 +35,14 @@ const getSingleAcademicDepartment = catchAsync(async (req, res) => {
     );
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: httpStatus.OK,
     success: true,
     message: 'Academic department is retrieved succesfully',
     data: result,
   });
 });
 
-const updateAcademicDepartment = catchAsync(async (req, res) => {
+const updateAcademicDeartment = catchAsync(async (req, res) => {
   const { departmentId } = req.params;
   const result =
     await AcademicDepartmentServices.updateAcademicDepartmentIntoDB(
@@ -51,7 +51,7 @@ const updateAcademicDepartment = catchAsync(async (req, res) => {
     );
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: httpStatus.OK,
     success: true,
     message: 'Academic department is updated succesfully',
     data: result,
@@ -59,8 +59,8 @@ const updateAcademicDepartment = catchAsync(async (req, res) => {
 });
 
 export const AcademicDepartmentControllers = {
-  CreateAcademicDepartment,
+  createAcademicDepartmemt,
   getAllAcademicDepartments,
   getSingleAcademicDepartment,
-  updateAcademicDepartment,
+  updateAcademicDeartment,
 };

@@ -1,7 +1,7 @@
-import { model, Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { TAcademicFaculty } from './academicFaculty.interface';
 
-const AcademicFacultySchema = new Schema<TAcademicFaculty>(
+const academicFacultySchema = new Schema<TAcademicFaculty>(
   {
     name: {
       type: String,
@@ -16,5 +16,5 @@ const AcademicFacultySchema = new Schema<TAcademicFaculty>(
 
 export const AcademicFaculty = model<TAcademicFaculty>(
   'AcademicFaculty',
-  AcademicFacultySchema,
+  academicFacultySchema,
 );

@@ -1,18 +1,17 @@
-import sendResponse from '../../utils/sentResponse';
-import HttpStatus from 'http-status';
-
+import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
 import { AcademicSemesterServices } from './academicSemester.service';
 
-const CreateAcademicSemester = catchAsync(async (req, res) => {
+const createAcademicSemester = catchAsync(async (req, res) => {
   const result = await AcademicSemesterServices.createAcademicSemesterIntoDB(
     req.body,
   );
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: httpStatus.OK,
     success: true,
-    message: 'Academic Semester is created succesfully',
+    message: 'Academic semester is created succesfully',
     data: result,
   });
 });
@@ -21,7 +20,7 @@ const getAllAcademicSemesters = catchAsync(async (req, res) => {
   const result = await AcademicSemesterServices.getAllAcademicSemestersFromDB();
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: httpStatus.OK,
     success: true,
     message: 'Academic semesters are retrieved successfully',
     data: result,
@@ -34,7 +33,7 @@ const getSingleAcademicSemester = catchAsync(async (req, res) => {
     await AcademicSemesterServices.getSingleAcademicSemesterFromDB(semesterId);
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: httpStatus.OK,
     success: true,
     message: 'Academic semester is retrieved succesfully',
     data: result,
@@ -49,15 +48,15 @@ const updateAcademicSemester = catchAsync(async (req, res) => {
   );
 
   sendResponse(res, {
-    statusCode: HttpStatus.OK,
+    statusCode: httpStatus.OK,
     success: true,
-    message: 'Academic semester is updated succesfully',
+    message: 'Academic semester is retrieved succesfully',
     data: result,
   });
 });
 
 export const AcademicSemesterControllers = {
-  CreateAcademicSemester,
+  createAcademicSemester,
   getAllAcademicSemesters,
   getSingleAcademicSemester,
   updateAcademicSemester,
