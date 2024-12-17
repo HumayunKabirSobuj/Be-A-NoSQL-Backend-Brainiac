@@ -5,8 +5,20 @@ import { User } from '../user/user.model';
 import { TStudent } from './student.interface';
 import { Student } from './student.model';
 
-const getAllStudentsFromDB = async () => {
-  const result = await Student.find()
+const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
+  // {email:{$regex:query.searchTerm,$options:i}}
+  // {presentAddress:{$regex:query.searchTerm,$options:i}}
+  // {'name.firstName':{$regex:query.searchTerm,$options:i}}
+
+  let searchTerm = '';
+  if (query?.searchTerm) {
+    searchTerm = query.searchTerm as string;
+  }
+  const result = await Student.find({
+    $or: ['email', 'name.fistName', 'presentAddress'].map((field) => ({
+      [field]: { $regex: searchTerm, $options: 'i' },
+    })),
+  })
     .populate('admissionSemester')
     .populate({
       path: 'academicDepartment',
@@ -33,13 +45,9 @@ const getSingleStudentFromDB = async (id: string) => {
 const updateStudentIntoDB = async (id: string, payload: Partial<TStudent>) => {
   const { name, guardian, localGuardian, ...remainingStudentData } = payload;
 
-
-
   const modifiedUpdatedData: Record<string, unknown> = {
     ...remainingStudentData,
   };
-
-  
 
   if (name && Object.keys(name).length) {
     for (const [key, value] of Object.entries(name)) {
@@ -58,7 +66,6 @@ const updateStudentIntoDB = async (id: string, payload: Partial<TStudent>) => {
       modifiedUpdatedData[`localGuardian.${key}`] = value;
     }
   }
-
 
   const result = await Student.findOneAndUpdate({ id }, modifiedUpdatedData, {
     new: true,
@@ -97,7 +104,7 @@ const deleteStudentFromDB = async (id: string) => {
     await session.endSession();
 
     return deletedStudent;
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   } catch (err) {
     await session.abortTransaction();
     await session.endSession();

@@ -8,6 +8,7 @@ import { AcademicSemester } from './../academicSemester/academicSemester.model';
 import { TUser } from './user.interface';
 import { User } from './user.model';
 import { generateStudentId } from './user.utils';
+import { TAcademicSemester } from '../academicSemester/academicSemester.interface';
 
 const createStudentIntoDB = async (password: string, payload: TStudent) => {
   // create a user object
@@ -20,9 +21,9 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
   userData.role = 'student';
 
   // find academic semester info
-  const admissionSemester = await AcademicSemester.findById(
+  const admissionSemester = (await AcademicSemester.findById(
     payload.admissionSemester,
-  );
+  )) as TAcademicSemester;
 
   const session = await mongoose.startSession();
 
@@ -54,10 +55,11 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
     await session.endSession();
 
     return newStudent;
-  } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
     await session.abortTransaction();
     await session.endSession();
-    throw new Error('Failed to create student');
+    throw new AppError(httpStatus.BAD_REQUEST, err);
   }
 };
 
