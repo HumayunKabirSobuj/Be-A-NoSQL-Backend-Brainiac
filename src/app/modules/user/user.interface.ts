@@ -16,7 +16,6 @@ export type TUserRole = keyof typeof USER_ROLE;
 
 //create statics method
 export interface UserModel extends Model<TUser> {
-  // myStaticMethod(): number;
   isUserExistsByCustomId(id: string): Promise<TUser>;
   isPasswordMatch(
     plainTextPassword: string,
