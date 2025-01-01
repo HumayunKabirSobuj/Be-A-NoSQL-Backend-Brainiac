@@ -27,6 +27,7 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
 
   //set student role
   userData.role = 'student';
+  userData.email = payload.email;
 
   // find academic semester info
   const admissionSemester = await AcademicSemester.findById(
@@ -36,7 +37,7 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
   if (!admissionSemester) {
     throw new AppError(400, 'Admission semester not found');
   }
-  
+
   const session = await mongoose.startSession();
 
   try {
@@ -83,6 +84,7 @@ const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
 
   //set student role
   userData.role = 'faculty';
+  userData.email = payload.email;
 
   // find academic department info
   const academicDepartment = await AcademicDepartment.findById(
@@ -137,8 +139,10 @@ const createAdminIntoDB = async (password: string, payload: TFaculty) => {
   //if password is not given , use deafult password
   userData.password = password || (config.default_password as string);
 
-  //set student role
+  //set admin role
   userData.role = 'admin';
+  //set admin email
+  userData.email = payload.email;
 
   const session = await mongoose.startSession();
 
@@ -148,7 +152,7 @@ const createAdminIntoDB = async (password: string, payload: TFaculty) => {
     userData.id = await generateAdminId();
 
     // create a user (transaction-1)
-    const newUser = await User.create([userData], { session }); 
+    const newUser = await User.create([userData], { session });
 
     //create a admin
     if (!newUser.length) {
