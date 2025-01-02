@@ -180,7 +180,7 @@ const createAdminIntoDB = async (password: string, payload: TFaculty) => {
   }
 };
 
-const getMe = async (userId:string, role:string) => {
+const getMe = async (userId: string, role: string) => {
   // const decoded = verifyToken(token, config.jwt_access_secret as string);
   // const { userId, role } = decoded;
 
@@ -199,9 +199,19 @@ const getMe = async (userId:string, role:string) => {
   return result;
 };
 
+const changeStatus = async (id: string, payload: { status: string }) => {
+  // console.log(id, payload);
+  // const user = await User.findById(id);
+  // console.log(user)
+  const result = await User.findByIdAndUpdate(id, payload, {
+    new: true,
+  });
+  return result;
+};
 export const UserServices = {
   createStudentIntoDB,
   createFacultyIntoDB,
   createAdminIntoDB,
   getMe,
+  changeStatus,
 };
