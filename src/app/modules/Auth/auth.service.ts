@@ -5,7 +5,7 @@ import { TLoginUser } from './auth.interface';
 import { JwtPayload } from 'jsonwebtoken';
 import config from '../../config';
 import bcrypt from 'bcrypt';
-import { createToken } from './auth.utils';
+import { createToken, verifyToken } from './auth.utils';
 import jwt from 'jsonwebtoken';
 import { sendEmail } from '../../utils/sendEmail';
 // const loginUser = async (payload: TLoginUser) => {
@@ -156,10 +156,11 @@ const changePassword = async (
 const refreshToken = async (token: string) => {
   //checking if given token is valid
 
-  const decoded = jwt.verify(
-    token,
-    config.jwt_refresh_secret as string,
-  ) as JwtPayload;
+  // const decoded = jwt.verify(
+  //   token,
+  //   config.jwt_refresh_secret as string,
+  // ) as JwtPayload;
+  const decoded = verifyToken(token, config.jwt_refresh_secret as string);
 
   const { userId, iat } = decoded;
 
@@ -287,9 +288,8 @@ const resetPassword = async (
     config.jwt_access_secret as string,
   ) as JwtPayload;
 
-
-  if(payload?.id !==decoded?.userId){
-    throw new AppError(httpStatus.FORBIDDEN,'You are forbidden !')
+  if (payload?.id !== decoded?.userId) {
+    throw new AppError(httpStatus.FORBIDDEN, 'You are forbidden !');
   }
 
   // hash new password
@@ -312,7 +312,6 @@ const resetPassword = async (
   );
 
   return null;
-
 };
 
 export const AuthServices = {
