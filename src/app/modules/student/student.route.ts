@@ -13,7 +13,6 @@ router.get(
   auth('student', 'admin', 'faculty'),
   StudentControllers.getSingleStudent,
 );
-
 router.patch(
   '/:id',
   validateRequest(updateStudentValidationSchema),

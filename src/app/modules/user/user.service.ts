@@ -180,6 +180,9 @@ const createAdminIntoDB = async (password: string, payload: TFaculty) => {
   }
 };
 
+
+
+
 export const UserServices = {
   createStudentIntoDB,
   createFacultyIntoDB,
