@@ -68,8 +68,6 @@ export const sendImageToCloudinary = (imageName: string, path: string) => {
     );
   });
 };
-
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, process.cwd() + '/uploads/');
