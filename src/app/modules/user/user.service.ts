@@ -30,6 +30,7 @@ const createStudentIntoDB = async (
   payload: TStudent,
 ) => {
   // create a user object
+  console.log(file)
   const userData: Partial<TUser> = {};
 
   //if password is not given , use deafult password
