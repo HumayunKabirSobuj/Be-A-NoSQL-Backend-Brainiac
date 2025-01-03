@@ -19,6 +19,11 @@ import {
 } from './user.utils';
 import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
 
+type CloudinaryResponse = {
+  secure_url: string;
+  // Add other properties if the response includes more data
+};
+
 const createStudentIntoDB = async (
   file: any,
   password: string,
@@ -53,7 +58,7 @@ const createStudentIntoDB = async (
     const imgName = `${userData.id}${payload?.name?.firstName}`;
     const path = file.path;
     // send image to cloudinary
-    const {secure_url} = await sendImageToCloudinary(imgName, path) ;
+    const {secure_url} = await sendImageToCloudinary(imgName, path) as CloudinaryResponse;
 
 
     // create a user (transaction-1)
